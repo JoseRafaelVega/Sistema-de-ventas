@@ -23,7 +23,7 @@ namespace Sistema.Negocio
             return Datos.Buscar(valor);
         }
 
-        public static string Insertar(int idRol, string nombre, string tipodocumento, string numdocumento, string direccion, string telefono, string email, string clave)
+        public static string Insertar(int idrol, string nombre, string tipodocumento, string numdocumento, string direccion, string telefono, string email, string clave)
         {
             DUsuario Datos = new DUsuario();
 
@@ -35,7 +35,7 @@ namespace Sistema.Negocio
             else
             {
                 Usuarios obj = new Usuarios();
-                obj.IdRol = idRol;
+                obj.IdRol = idrol;
                 obj.Nombre = nombre;
                 obj.Tipo_Documento = tipodocumento;
                 obj.Num_Documento = numdocumento;
@@ -48,13 +48,13 @@ namespace Sistema.Negocio
             }
         }
 
-        public static string Actualizar(int idusuario, int idRol, string nombre, string tipodocumento, string numdocumento, string direccion, string telefono, string email, string clave)
+        public static string Actualizar(int idusuario, int idrol, string nombre, string tipodocumento, string numdocumento, string direccion, string telefono, string email, string clave)
         {
             DUsuario Datos = new DUsuario();
 
             Usuarios obj = new Usuarios();
             obj.IdUsuario = idusuario;
-            obj.IdRol = idRol;
+            obj.IdRol = idrol;
             obj.Nombre = nombre;
             obj.Tipo_Documento = tipodocumento;
             obj.Num_Documento = numdocumento;

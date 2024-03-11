@@ -151,8 +151,8 @@ namespace Sistema.Datos
                 Comando.Parameters.Add("@idusuario", SqlDbType.Int).Value = obj.IdUsuario;
                 Comando.Parameters.Add("@idrol", SqlDbType.Int).Value = obj.IdRol;
                 Comando.Parameters.Add("@nombre", SqlDbType.VarChar).Value = obj.Nombre;
-                Comando.Parameters.Add("@tipo_documento", SqlDbType.Decimal).Value = obj.Tipo_Documento;
-                Comando.Parameters.Add("@num_documento", SqlDbType.Int).Value = obj.Num_Documento;
+                Comando.Parameters.Add("@tipo_documento", SqlDbType.VarChar).Value = obj.Tipo_Documento;
+                Comando.Parameters.Add("@num_documento", SqlDbType.VarChar).Value = obj.Num_Documento;
                 Comando.Parameters.Add("@direccion", SqlDbType.VarChar).Value = obj.Direccion;
                 Comando.Parameters.Add("@telefono", SqlDbType.VarChar).Value = obj.Telefono;
                 Comando.Parameters.Add("@email", SqlDbType.VarChar).Value = obj.Email;

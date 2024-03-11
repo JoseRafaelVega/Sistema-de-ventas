@@ -37,7 +37,7 @@ namespace Sistema.Presentacion
         }
         public void Formato()
         {
-            dgvListado.Columns[0].Visible = true;
+            dgvListado.Columns[0].Visible = false;
             dgvListado.Columns[1].Visible = true;
             dgvListado.Columns[2].Width = 150;
             dgvListado.Columns[3].Width = 300;
@@ -57,7 +57,6 @@ namespace Sistema.Presentacion
             {
                 CbUsuarios.Items.Add(documento);
             }
-            CbUsuarios.SelectedIndex = 0;
         }
 
         private void CbUsuarios_SelectedIndexChanged(object sender, EventArgs e)
@@ -136,7 +135,9 @@ namespace Sistema.Presentacion
             TxtClave.Clear();
             TxtBuscar.Clear();
             TxtTelefono.Clear();
-            CbUsuarios.Items.Clear();
+            BtnActivar.Visible = false;
+            BtnDesactivar.Visible = false;
+            BtnEliminar.Visible = false;
         }
 
         private void dgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -146,6 +147,7 @@ namespace Sistema.Presentacion
                 this.Limpiar();
                 BtnActualizar.Visible = true;
                 BtnInsertar.Visible = true;
+                TxtUsuarios.Text = dgvListado.CurrentRow.Cells["idrol"].Value.ToString();
                 TxtId.Text = dgvListado.CurrentRow.Cells["idusuario"].Value.ToString();
                 TxtNombre.Text = dgvListado.CurrentRow.Cells["nombre"].Value.ToString();
                 CbUsuarios.Text = dgvListado.CurrentRow.Cells["tipo documento"].Value.ToString();
@@ -165,7 +167,180 @@ namespace Sistema.Presentacion
 
         private void ChkSeleccionar_CheckedChanged(object sender, EventArgs e)
         {
+            if (ChkSeleccionar.Checked)
+            {
+                dgvListado.Columns[0].Visible = true;
+                BtnActivar.Visible = true;
+                BtnDesactivar.Visible = true;
+                BtnEliminar.Visible = true;
+            }
+            else
+            {
+                dgvListado.Columns[0].Visible = false;
+                BtnActivar.Visible = false;
+                BtnDesactivar.Visible = false;
+                BtnEliminar.Visible = false;
+            }
+        }
 
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            this.Buscar();
+        }
+
+        private void BtnActualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string respuesta = "";
+                if (TxtNombre.Text == string.Empty || TxtUsuarios.Text == string.Empty)
+                {
+                    this.MensajeError("Debe ingresar todos los campos requeridos");
+                    errorProvider1.SetError(TxtNombre, "Ingrese el nombre");
+                    errorProvider1.SetError(TxtEmail, "Ingrese el correo electronico");
+                    errorProvider1.SetError(TxtId, "Ingrese el rol del usuario");
+                }
+                else
+                {
+                    respuesta = NUsuarios.Actualizar(Convert.ToInt32(TxtUsuarios.Text), Convert.ToInt32(TxtId.Text), TxtNombre.Text, CbUsuarios.Text, TxtNumDocumento.Text, TxtDireccion.Text, TxtTelefono.Text, TxtEmail.Text, TxtClave.Text);
+                    if (respuesta == "OK")
+                    {
+                        this.MensajeOK("El registro se insertó de manera correcta");
+                        this.Listar();
+                    }
+                    else
+                    {
+                        this.MensajeError(respuesta);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Limpiar();
+        }
+
+        private void BtnActivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult opcion = MessageBox.Show("Desea activar este usuario?", "Sistema de ventas-activar", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (opcion == DialogResult.OK)
+                {
+                    int codigo;
+                    string respuesta = "";
+
+                    foreach (DataGridViewRow row in dgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            codigo = Convert.ToInt32(row.Cells[1].Value);
+                            respuesta = NUsuarios.Activar(codigo);
+
+                            if (respuesta == "OK")
+                            {
+                                this.MensajeOK($"Se activó el usuario: {row.Cells[2].Value}");
+                            }
+                            else
+                            {
+                                this.MensajeError(respuesta);
+                            }
+                        }
+                    }
+                    this.Listar();
+                    ChkSeleccionar.Checked = false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+    
+        }
+
+        private void BtnDesactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult opcion = MessageBox.Show("Desea desactivar este usuario?", "Sistema de ventas-activar", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (opcion == DialogResult.OK)
+                {
+                    int codigo;
+                    string respuesta = "";
+
+                    foreach (DataGridViewRow row in dgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            codigo = Convert.ToInt32(row.Cells[1].Value);
+                            respuesta = NUsuarios.Desactivar(codigo);
+
+                            if (respuesta == "OK")
+                            {
+                                this.MensajeOK($"Se desactivó el usuario: {row.Cells[2].Value}");
+                            }
+                            else
+                            {
+                                this.MensajeError(respuesta);
+                            }
+                        }
+
+                    }
+                    this.Listar();
+                    ChkSeleccionar.Checked = false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult opcion = MessageBox.Show("Desea eliminar este usuario?", "Sistema de ventas-activar", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (opcion == DialogResult.OK)
+                {
+                    int codigo;
+                    string respuesta = "";
+
+                    foreach (DataGridViewRow row in dgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            codigo = Convert.ToInt32(row.Cells[1].Value);
+                            respuesta = NUsuarios.Eliminar(codigo);
+
+                            if (respuesta == "OK")
+                            {
+                                this.MensajeOK($"Se eliminó el usuario: {row.Cells[2].Value}");
+                            }
+                            else
+                            {
+                                this.MensajeError(respuesta);
+                            }
+                        }
+
+                    }
+                    this.Listar();
+                    ChkSeleccionar.Checked = false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
         }
     }
 }

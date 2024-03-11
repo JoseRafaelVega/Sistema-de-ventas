@@ -36,10 +36,10 @@
             this.BtnDesactivar = new System.Windows.Forms.Button();
             this.BtnActivar = new System.Windows.Forms.Button();
             this.ChkSeleccionar = new System.Windows.Forms.CheckBox();
-            this.dgvListado = new System.Windows.Forms.DataGridView();
             this.BtnBuscar = new System.Windows.Forms.Button();
             this.TxtBuscar = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.CbUsuarios = new System.Windows.Forms.ComboBox();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnInsertar = new System.Windows.Forms.Button();
             this.BtnActualizar = new System.Windows.Forms.Button();
@@ -57,14 +57,15 @@
             this.TxtId = new System.Windows.Forms.TextBox();
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.CbUsuarios = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvListado = new System.Windows.Forms.DataGridView();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.TxtUsuarios = new System.Windows.Forms.TextBox();
             this.tabGeneral.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
             this.SuspendLayout();
             // 
             // tabGeneral
@@ -79,12 +80,12 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dgvListado);
             this.tabPage1.Controls.Add(this.LblRegistros);
             this.tabPage1.Controls.Add(this.BtnEliminar);
             this.tabPage1.Controls.Add(this.BtnDesactivar);
             this.tabPage1.Controls.Add(this.BtnActivar);
             this.tabPage1.Controls.Add(this.ChkSeleccionar);
-            this.tabPage1.Controls.Add(this.dgvListado);
             this.tabPage1.Controls.Add(this.BtnBuscar);
             this.tabPage1.Controls.Add(this.TxtBuscar);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -112,6 +113,7 @@
             this.BtnEliminar.TabIndex = 6;
             this.BtnEliminar.Text = "Eliminar";
             this.BtnEliminar.UseVisualStyleBackColor = true;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
             // BtnDesactivar
             // 
@@ -121,6 +123,7 @@
             this.BtnDesactivar.TabIndex = 5;
             this.BtnDesactivar.Text = "Desactivar";
             this.BtnDesactivar.UseVisualStyleBackColor = true;
+            this.BtnDesactivar.Click += new System.EventHandler(this.BtnDesactivar_Click);
             // 
             // BtnActivar
             // 
@@ -130,6 +133,7 @@
             this.BtnActivar.TabIndex = 4;
             this.BtnActivar.Text = "Activar";
             this.BtnActivar.UseVisualStyleBackColor = true;
+            this.BtnActivar.Click += new System.EventHandler(this.BtnActivar_Click);
             // 
             // ChkSeleccionar
             // 
@@ -142,18 +146,6 @@
             this.ChkSeleccionar.UseVisualStyleBackColor = true;
             this.ChkSeleccionar.CheckedChanged += new System.EventHandler(this.ChkSeleccionar_CheckedChanged);
             // 
-            // dgvListado
-            // 
-            this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1});
-            this.dgvListado.Location = new System.Drawing.Point(29, 65);
-            this.dgvListado.Name = "dgvListado";
-            this.dgvListado.Size = new System.Drawing.Size(708, 277);
-            this.dgvListado.TabIndex = 2;
-            this.dgvListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
-            this.dgvListado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellDoubleClick);
-            // 
             // BtnBuscar
             // 
             this.BtnBuscar.Location = new System.Drawing.Point(395, 21);
@@ -162,6 +154,7 @@
             this.BtnBuscar.TabIndex = 1;
             this.BtnBuscar.Text = "Buscar";
             this.BtnBuscar.UseVisualStyleBackColor = true;
+            this.BtnBuscar.Click += new System.EventHandler(this.BtnBuscar_Click);
             // 
             // TxtBuscar
             // 
@@ -172,6 +165,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.TxtUsuarios);
             this.tabPage2.Controls.Add(this.CbUsuarios);
             this.tabPage2.Controls.Add(this.BtnCancelar);
             this.tabPage2.Controls.Add(this.BtnInsertar);
@@ -198,6 +192,15 @@
             this.tabPage2.Text = "Mantenimiento";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // CbUsuarios
+            // 
+            this.CbUsuarios.FormattingEnabled = true;
+            this.CbUsuarios.Location = new System.Drawing.Point(158, 127);
+            this.CbUsuarios.Name = "CbUsuarios";
+            this.CbUsuarios.Size = new System.Drawing.Size(315, 21);
+            this.CbUsuarios.TabIndex = 18;
+            this.CbUsuarios.SelectedIndexChanged += new System.EventHandler(this.CbUsuarios_SelectedIndexChanged);
+            // 
             // BtnCancelar
             // 
             this.BtnCancelar.Location = new System.Drawing.Point(398, 494);
@@ -206,6 +209,7 @@
             this.BtnCancelar.TabIndex = 17;
             this.BtnCancelar.Text = "Cancelar";
             this.BtnCancelar.UseVisualStyleBackColor = true;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // BtnInsertar
             // 
@@ -225,6 +229,7 @@
             this.BtnActualizar.TabIndex = 15;
             this.BtnActualizar.Text = "Actualizar";
             this.BtnActualizar.UseVisualStyleBackColor = true;
+            this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
             // TxtClave
             // 
@@ -338,23 +343,35 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre(*):";
             // 
-            // CbUsuarios
-            // 
-            this.CbUsuarios.FormattingEnabled = true;
-            this.CbUsuarios.Location = new System.Drawing.Point(158, 127);
-            this.CbUsuarios.Name = "CbUsuarios";
-            this.CbUsuarios.Size = new System.Drawing.Size(315, 21);
-            this.CbUsuarios.TabIndex = 18;
-            this.CbUsuarios.SelectedIndexChanged += new System.EventHandler(this.CbUsuarios_SelectedIndexChanged);
-            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // Column1
+            // dgvListado
             // 
-            this.Column1.HeaderText = "Seleccionar";
-            this.Column1.Name = "Column1";
+            this.dgvListado.AllowUserToAddRows = false;
+            this.dgvListado.AllowUserToOrderColumns = true;
+            this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Seleccionar});
+            this.dgvListado.Location = new System.Drawing.Point(37, 71);
+            this.dgvListado.Name = "dgvListado";
+            this.dgvListado.Size = new System.Drawing.Size(686, 271);
+            this.dgvListado.TabIndex = 8;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Seleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // TxtUsuarios
+            // 
+            this.TxtUsuarios.Location = new System.Drawing.Point(158, 29);
+            this.TxtUsuarios.Name = "TxtUsuarios";
+            this.TxtUsuarios.Size = new System.Drawing.Size(100, 20);
+            this.TxtUsuarios.TabIndex = 19;
             // 
             // frmUsuario
             // 
@@ -368,10 +385,10 @@
             this.tabGeneral.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -380,7 +397,6 @@
 
         private System.Windows.Forms.TabControl tabGeneral;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView dgvListado;
         private System.Windows.Forms.Button BtnBuscar;
         private System.Windows.Forms.TextBox TxtBuscar;
         private System.Windows.Forms.TabPage tabPage2;
@@ -408,6 +424,8 @@
         private System.Windows.Forms.Button BtnActualizar;
         private System.Windows.Forms.ComboBox CbUsuarios;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
+        private System.Windows.Forms.DataGridView dgvListado;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.TextBox TxtUsuarios;
     }
 }
