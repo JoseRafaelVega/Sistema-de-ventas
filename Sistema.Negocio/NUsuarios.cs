@@ -82,5 +82,17 @@ namespace Sistema.Negocio
             DUsuario Datos = new DUsuario();
             return Datos.Desactivar(IdUsuario);
         }
+
+        public static DataTable RolListar()
+        {
+            DUsuario Datos = new DUsuario();
+            return Datos.RolListar();
+        }
+
+        public static DataTable Login(string email, string clave)
+        {
+            DUsuario datos = new DUsuario();
+            return datos.Login(email, clave);
+        }
     }
 }

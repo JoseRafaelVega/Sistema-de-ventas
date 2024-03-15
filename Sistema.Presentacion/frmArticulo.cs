@@ -33,9 +33,8 @@ namespace Sistema.Presentacion
             dgvListado.Columns[4].Width = 100;
             dgvListado.Columns[5].Width = 100;
             dgvListado.Columns[6].Width = 100;
-            dgvListado.Columns[7].Width = 250;
-            dgvListado.Columns[7].HeaderText = "Descripción";
-            dgvListado.Columns[8].Width = 100;
+            dgvListado.Columns[8].Width = 250;
+            dgvListado.Columns[8].HeaderText = "Descripción";
             dgvListado.Columns[9].Width = 100;
             
             
@@ -246,8 +245,6 @@ namespace Sistema.Presentacion
                 BtnDesactivar.Visible = false;
                 BtnEliminar.Visible = false;
             }
-
-
         }
 
         private void BtnActivar_Click(object sender, EventArgs e)
@@ -428,6 +425,11 @@ namespace Sistema.Presentacion
 
                 MessageBox.Show("Seleccione una celda a partir del nombre");
             }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

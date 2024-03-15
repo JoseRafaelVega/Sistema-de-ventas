@@ -39,7 +39,8 @@ namespace Sistema.Presentacion
         {
             dgvListado.Columns[0].Visible = false;
             dgvListado.Columns[1].Visible = true;
-            dgvListado.Columns[2].Width = 150;
+            dgvListado.Columns[2].Visible = false;
+            dgvListado.Columns[3].HeaderText = "Rol";
             dgvListado.Columns[3].Width = 300;
             dgvListado.Columns[4].Width = 100;
             dgvListado.Columns[5].Width = 100;
@@ -81,11 +82,11 @@ namespace Sistema.Presentacion
                     this.MensajeError("Debe ingresar todos los campos requeridos");
                     errorProvider1.SetError(TxtNombre, "Ingrese el nombre");
                     errorProvider1.SetError(TxtEmail, "Ingrese el correo electronico");
-                    errorProvider1.SetError(TxtId, "Ingrese el rol del usuario");
+                    errorProvider1.SetError(CbRol, "Ingrese el rol del usuario");
                 }
                 else
                 {
-                    respuesta = NUsuarios.Insertar(Convert.ToInt32(TxtId.Text), TxtNombre.Text, CbUsuarios.Text, TxtNumDocumento.Text, TxtDireccion.Text, TxtTelefono.Text, TxtEmail.Text, TxtClave.Text);
+                    respuesta = NUsuarios.Insertar(Convert.ToInt32(CbRol.Text), TxtNombre.Text, CbUsuarios.Text, TxtNumDocumento.Text, TxtDireccion.Text, TxtTelefono.Text, TxtEmail.Text, TxtClave.Text);
                     if (respuesta == "OK")
                     {
                         this.MensajeOK("El registro se insertó de manera correcta");
@@ -131,6 +132,7 @@ namespace Sistema.Presentacion
             TxtId.Clear();
             TxtNombre.Clear();
             TxtNumDocumento.Clear();
+            TxtDireccion.Clear();
             TxtEmail.Clear();
             TxtClave.Clear();
             TxtBuscar.Clear();
@@ -147,7 +149,7 @@ namespace Sistema.Presentacion
                 this.Limpiar();
                 BtnActualizar.Visible = true;
                 BtnInsertar.Visible = true;
-                TxtUsuarios.Text = dgvListado.CurrentRow.Cells["idrol"].Value.ToString();
+                CbRol.Text = dgvListado.CurrentRow.Cells["idrol"].Value.ToString();
                 TxtId.Text = dgvListado.CurrentRow.Cells["idusuario"].Value.ToString();
                 TxtNombre.Text = dgvListado.CurrentRow.Cells["nombre"].Value.ToString();
                 CbUsuarios.Text = dgvListado.CurrentRow.Cells["tipo documento"].Value.ToString();
@@ -193,7 +195,7 @@ namespace Sistema.Presentacion
             try
             {
                 string respuesta = "";
-                if (TxtNombre.Text == string.Empty || TxtUsuarios.Text == string.Empty)
+                if (TxtNombre.Text == string.Empty || CbRol.Text == string.Empty)
                 {
                     this.MensajeError("Debe ingresar todos los campos requeridos");
                     errorProvider1.SetError(TxtNombre, "Ingrese el nombre");
@@ -202,7 +204,7 @@ namespace Sistema.Presentacion
                 }
                 else
                 {
-                    respuesta = NUsuarios.Actualizar(Convert.ToInt32(TxtUsuarios.Text), Convert.ToInt32(TxtId.Text), TxtNombre.Text, CbUsuarios.Text, TxtNumDocumento.Text, TxtDireccion.Text, TxtTelefono.Text, TxtEmail.Text, TxtClave.Text);
+                    respuesta = NUsuarios.Actualizar(Convert.ToInt32(TxtId.Text), Convert.ToInt32(CbRol.Text), TxtNombre.Text, CbUsuarios.Text, TxtNumDocumento.Text, TxtDireccion.Text, TxtTelefono.Text, TxtEmail.Text, TxtClave.Text);
                     if (respuesta == "OK")
                     {
                         this.MensajeOK("El registro se insertó de manera correcta");
@@ -340,6 +342,51 @@ namespace Sistema.Presentacion
             {
 
                 MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void CbRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CbRol.Items.Clear();
+            try
+            {
+                DataTable dt = NUsuarios.RolListar();
+                
+                foreach (DataRow fila in dt.Rows)
+                {
+                    var name = fila["nombre"].ToString();
+                    var id = fila["idrol"].ToString();
+
+                    if (name == CbRol.SelectedItem.ToString())
+                    {
+                        IdRol.Text = id.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        private void CbRol_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CbRol.Items.Clear();
+
+                DataTable roles = NUsuarios.RolListar();
+
+                foreach (DataRow fila in roles.Rows)
+                {
+                    var name = fila["nombre"].ToString();
+                     CbRol.Items.Add(name);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los roles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -12,6 +12,13 @@ namespace Sistema.Presentacion
 {
     public partial class frmPrincipal : Form
     {
+        public int IdUsuario { get; set; }
+        public int IdRol {  get; set; }
+        public string Nombre { get; set; }
+        public string Rol { get; set; }
+        public bool Estado { get; set; }
+        
+        
         private int childFormNumber = 0;
 
         public frmPrincipal()
@@ -133,6 +140,50 @@ namespace Sistema.Presentacion
             frmUsuario frm = new frmUsuario();
             frm.MdiParent = this;
             frm.Show();
+        }
+
+        private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = $"Usuario: "{ this.Nombre}
+            {DateTime.Now};
+            MessageBox.Show("Bienvenido al sistema: " + this.Nombre);
+
+
+            if (this.Rol.Equals('Administrador'))
+            {
+                categoríasToolStripMenuItem.Enabled = true;
+                ingresosToolStripMenuItem.Enabled = true;
+                ventasToolStripMenuItem.Enabled = true;
+                accesosToolStripMenuItem.Enabled = true;
+                consultasToolStripMenuItem.Enabled = true;
+                comprasToolStripMenuItem.Enabled = true;
+                almacénToolStripMenuItem.Enabled = true;
+            }
+            else if (this.Rol.Equals('Vendedor'))
+            {
+                categoríasToolStripMenuItem.Enabled = false;
+                ingresosToolStripMenuItem.Enabled = false;
+                ventasToolStripMenuItem.Enabled = true;
+                accesosToolStripMenuItem.Enabled = false;
+                consultasToolStripMenuItem.Enabled = true;
+                comprasToolStripMenuItem.Enabled = true;
+                almacénToolStripMenuItem.Enabled = false;
+            }
+            else if (this.Rol.Equals('almacen'))
+            {
+
+            }
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult = MessageBox.Show("Desea salir de la aplicación", MessageBoxButtons.OKCancel)
+
         }
     }
 }

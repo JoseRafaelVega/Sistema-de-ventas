@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabGeneral = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvListado = new System.Windows.Forms.DataGridView();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.LblRegistros = new System.Windows.Forms.Label();
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.BtnDesactivar = new System.Windows.Forms.Button();
@@ -39,6 +41,8 @@
             this.BtnBuscar = new System.Windows.Forms.Button();
             this.TxtBuscar = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.CbRol = new System.Windows.Forms.ComboBox();
             this.CbUsuarios = new System.Windows.Forms.ComboBox();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnInsertar = new System.Windows.Forms.Button();
@@ -58,14 +62,12 @@
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dgvListado = new System.Windows.Forms.DataGridView();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.TxtUsuarios = new System.Windows.Forms.TextBox();
+            this.IdRol = new System.Windows.Forms.TextBox();
             this.tabGeneral.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
             this.SuspendLayout();
             // 
             // tabGeneral
@@ -95,6 +97,25 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Listado";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvListado
+            // 
+            this.dgvListado.AllowUserToAddRows = false;
+            this.dgvListado.AllowUserToOrderColumns = true;
+            this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Seleccionar});
+            this.dgvListado.Location = new System.Drawing.Point(37, 71);
+            this.dgvListado.Name = "dgvListado";
+            this.dgvListado.Size = new System.Drawing.Size(686, 271);
+            this.dgvListado.TabIndex = 8;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Seleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // LblRegistros
             // 
@@ -165,7 +186,9 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.TxtUsuarios);
+            this.tabPage2.Controls.Add(this.IdRol);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.CbRol);
             this.tabPage2.Controls.Add(this.CbUsuarios);
             this.tabPage2.Controls.Add(this.BtnCancelar);
             this.tabPage2.Controls.Add(this.BtnInsertar);
@@ -191,6 +214,25 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mantenimiento";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(111, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(26, 13);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Rol:";
+            // 
+            // CbRol
+            // 
+            this.CbRol.FormattingEnabled = true;
+            this.CbRol.Location = new System.Drawing.Point(158, 28);
+            this.CbRol.Name = "CbRol";
+            this.CbRol.Size = new System.Drawing.Size(160, 21);
+            this.CbRol.TabIndex = 19;
+            this.CbRol.SelectedIndexChanged += new System.EventHandler(this.CbRol_SelectedIndexChanged);
+            this.CbRol.Click += new System.EventHandler(this.CbRol_Click);
             // 
             // CbUsuarios
             // 
@@ -347,31 +389,12 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // dgvListado
+            // IdRol
             // 
-            this.dgvListado.AllowUserToAddRows = false;
-            this.dgvListado.AllowUserToOrderColumns = true;
-            this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Seleccionar});
-            this.dgvListado.Location = new System.Drawing.Point(37, 71);
-            this.dgvListado.Name = "dgvListado";
-            this.dgvListado.Size = new System.Drawing.Size(686, 271);
-            this.dgvListado.TabIndex = 8;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Seleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // TxtUsuarios
-            // 
-            this.TxtUsuarios.Location = new System.Drawing.Point(158, 29);
-            this.TxtUsuarios.Name = "TxtUsuarios";
-            this.TxtUsuarios.Size = new System.Drawing.Size(100, 20);
-            this.TxtUsuarios.TabIndex = 19;
+            this.IdRol.Location = new System.Drawing.Point(525, 29);
+            this.IdRol.Name = "IdRol";
+            this.IdRol.Size = new System.Drawing.Size(100, 20);
+            this.IdRol.TabIndex = 21;
             // 
             // frmUsuario
             // 
@@ -385,10 +408,10 @@
             this.tabGeneral.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -426,6 +449,8 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.DataGridView dgvListado;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
-        private System.Windows.Forms.TextBox TxtUsuarios;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox CbRol;
+        private System.Windows.Forms.TextBox IdRol;
     }
 }

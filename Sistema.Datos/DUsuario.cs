@@ -258,5 +258,66 @@ namespace Sistema.Datos
             }
             return Respuesta;
         }
+
+        public DataTable RolListar()
+        {
+            SqlDataReader Resultado;
+            DataTable Tabla = new DataTable();
+            SqlConnection sqlcon = new SqlConnection();
+            try
+            {
+                sqlcon = Conexion.getInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("rol_listar", sqlcon);
+                Comando.CommandType = CommandType.StoredProcedure;
+                sqlcon.Open();
+                Resultado = Comando.ExecuteReader();
+                Tabla.Load(Resultado);
+                return Tabla;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                if (sqlcon.State == ConnectionState.Open)
+                {
+                    sqlcon.Close();
+                }
+            }
+        }
+
+        public DataTable Login(string email, string clave)
+        {
+            SqlDataReader Resultado;
+            DataTable Tabla = new DataTable();
+            SqlConnection sqlcon = new SqlConnection();
+            try
+            {
+                sqlcon = Conexion.getInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("usuario_login", sqlcon);
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
+                Comando.Parameters.Add("@clave", SqlDbType.VarChar).Value = clave;
+                sqlcon.Open();
+                Resultado = Comando.ExecuteReader();
+                Tabla.Load(Resultado);
+                return Tabla;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                if (sqlcon.State == ConnectionState.Open)
+                {
+                    sqlcon.Close();
+                }
+            }
+        }
+
     }
 }
