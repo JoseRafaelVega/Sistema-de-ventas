@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sistema.Negocio;
 using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Sistema.Presentacion
 {
@@ -18,6 +19,20 @@ namespace Sistema.Presentacion
         {
             InitializeComponent();
             prepareCbUsuarios();
+
+            var idrol = new[]
+            {
+                new { Text = "Administrador", Value = 1 },
+                new { Text = "Vendedor", Value = 2 },
+                new { Text = "Almacen", Value = 3 }
+            };
+            CbRol.DataSource = idrol;
+            CbRol.DisplayMember = "Text"; // Mostrar el texto
+            CbRol.ValueMember = "Value"; // Utilizar el valor entero
+
+            // Manejar el evento de selección cambiada
+            CbRol.SelectedIndexChanged += CbRol_SelectedIndexChanged;
+
         }
 
         private void frmUsuario_Load(object sender, EventArgs e)
@@ -37,9 +52,9 @@ namespace Sistema.Presentacion
         }
         public void Formato()
         {
-            dgvListado.Columns[0].Visible = false;
+            dgvListado.Columns[0].Visible = true;
             dgvListado.Columns[1].Visible = true;
-            dgvListado.Columns[2].Visible = false;
+            dgvListado.Columns[2].Visible = true;
             dgvListado.Columns[3].HeaderText = "Rol";
             dgvListado.Columns[3].Width = 300;
             dgvListado.Columns[4].Width = 100;
@@ -86,7 +101,7 @@ namespace Sistema.Presentacion
                 }
                 else
                 {
-                    respuesta = NUsuarios.Insertar(Convert.ToInt32(CbRol.Text), TxtNombre.Text, CbUsuarios.Text, TxtNumDocumento.Text, TxtDireccion.Text, TxtTelefono.Text, TxtEmail.Text, TxtClave.Text);
+                    respuesta = NUsuarios.Insertar(Convert.ToInt32(CbRol.SelectedValue), TxtNombre.Text, CbUsuarios.Text, TxtNumDocumento.Text, TxtDireccion.Text, TxtTelefono.Text, TxtEmail.Text, TxtClave.Text);
                     if (respuesta == "OK")
                     {
                         this.MensajeOK("El registro se insertó de manera correcta");
@@ -347,47 +362,50 @@ namespace Sistema.Presentacion
 
         private void CbRol_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CbRol.Items.Clear();
-            try
-            {
-                DataTable dt = NUsuarios.RolListar();
-                
-                foreach (DataRow fila in dt.Rows)
-                {
-                    var name = fila["nombre"].ToString();
-                    var id = fila["idrol"].ToString();
 
-                    if (name == CbRol.SelectedItem.ToString())
-                    {
-                        IdRol.Text = id.ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
+            if (CbRol.SelectedValue != null && CbRol.SelectedValue is int)
             {
-                MessageBox.Show(ex.Message + ex.StackTrace);
+                int selectedValue = (int)CbRol.SelectedValue;
+                Console.WriteLine("Valor seleccionado: " + selectedValue);
             }
-
+            else
+            {
+                Console.WriteLine("No se pudo convertir el valor seleccionado a entero.");
+            }
+            //int selectedValue = (int)CbRol.SelectedValue;
+            //Console.WriteLine("Valor seleccionado: " + selectedValue);
         }
 
         private void CbRol_Click(object sender, EventArgs e)
         {
-            try
-            {
-                CbRol.Items.Clear();
+            
+        }
 
-                DataTable roles = NUsuarios.RolListar();
+        private void dgvListado_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
 
-                foreach (DataRow fila in roles.Rows)
-                {
-                    var name = fila["nombre"].ToString();
-                     CbRol.Items.Add(name);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar los roles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+        }
+
+        private void dgvListado_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvListado_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            this.Limpiar();
+            BtnActualizar.Visible = true;
+            BtnInsertar.Visible = true;
+            CbRol.Text = dgvListado.CurrentRow.Cells["idrol"].Value.ToString();
+            TxtId.Text = dgvListado.CurrentRow.Cells["ID"].Value.ToString();
+            TxtNombre.Text = dgvListado.CurrentRow.Cells["nombre"].Value.ToString();
+            CbUsuarios.Text = dgvListado.CurrentRow.Cells["tipo_documento"].Value.ToString();
+            TxtNumDocumento.Text = dgvListado.CurrentRow.Cells["num_documento"].Value.ToString();
+            TxtDireccion.Text = dgvListado.CurrentRow.Cells["direccion"].Value.ToString();
+            TxtTelefono.Text = dgvListado.CurrentRow.Cells["telefono"].Value.ToString();
+            TxtEmail.Text = dgvListado.CurrentRow.Cells["email"].Value.ToString();
+            TxtEstado.Text = dgvListado.CurrentRow.Cells["estado"].Value.ToString();
+            tabGeneral.SelectedIndex = 1;
         }
     }
 }

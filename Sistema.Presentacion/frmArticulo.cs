@@ -26,7 +26,7 @@ namespace Sistema.Presentacion
         public void Formato()
         {
             dgvListado.Columns[0].Visible = false;
-            dgvListado.Columns[1].Visible = false;
+            dgvListado.Columns[1].Visible = true;
             dgvListado.Columns[2].Width = 150;
             dgvListado.Columns[3].Width = 300;
             dgvListado.Columns[3].Width = 100;
@@ -383,7 +383,7 @@ namespace Sistema.Presentacion
                 }
                 else
                 {
-                    respuesta = NArticulos.Actualizar(Convert.ToInt32(txtId.Text), int.Parse(TxtIdArticulo.Text), TxtCodigo.Text, txtNombre.Text, decimal.Parse(TxtPrecio.Text), int.Parse(TxtStock.Text), txtDescripcion.Text, txtImagen.Text);
+                    respuesta = NArticulos.Actualizar(Convert.ToInt32(TxtIdArticulo.Text), int.Parse(txtId.Text), TxtCodigo.Text, txtNombre.Text, decimal.Parse(TxtPrecio.Text), int.Parse(TxtStock.Text), txtDescripcion.Text, txtImagen.Text);
                     if (respuesta == "OK")
                     {
                         this.MensajeOK("El registro se actualizó de manera correcta");
@@ -405,31 +405,36 @@ namespace Sistema.Presentacion
 
         private void dgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                this.Limpiar();
-                BtnActualizar.Visible = true;
-                BtnInsertar.Visible = false;
-                txtId.Text = dgvListado.CurrentRow.Cells["ID"].Value.ToString();
-                TxtCodigo.Text = dgvListado.CurrentRow.Cells["CodigoBarras"].Value.ToString();
-                txtNombre.Text = dgvListado.CurrentRow.Cells["Nombre"].Value.ToString();
-                TxtPrecio.Text = dgvListado.CurrentRow.Cells["Precio Venta"].Value.ToString();
-                TxtStock.Text = dgvListado.CurrentRow.Cells["Stock"].Value.ToString();
-                txtDescripcion.Text = dgvListado.CurrentRow.Cells["Descripcion"].Value.ToString();
-                txtImagen.Text = dgvListado.CurrentRow.Cells["Imagen"].Value.ToString();
-
-                tabControl1.SelectedIndex = 1;
-            }
-            catch (Exception )
-            {
-
-                MessageBox.Show("Seleccione una celda a partir del nombre");
-            }
+            
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvListado_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                this.Limpiar();
+                BtnActualizar.Visible = true;
+                BtnInsertar.Visible = false;
+                TxtIdArticulo.Text = dgvListado.CurrentRow.Cells["ID"].Value.ToString();
+                txtId.Text = dgvListado.CurrentRow.Cells["idcategoria"].Value.ToString();
+                TxtCodigo.Text = dgvListado.CurrentRow.Cells["Codigo"].Value.ToString();
+                txtNombre.Text = dgvListado.CurrentRow.Cells["Nombre"].Value.ToString();
+                TxtPrecio.Text = dgvListado.CurrentRow.Cells["Precio_Venta"].Value.ToString();
+                TxtStock.Text = dgvListado.CurrentRow.Cells["Stock"].Value.ToString();
+                txtDescripcion.Text = dgvListado.CurrentRow.Cells["Descripcion"].Value.ToString();
+                txtImagen.Text = dgvListado.CurrentRow.Cells["Imagen"].Value.ToString();
+                tabControl1.SelectedIndex = 1;
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Seleccione una celda a partir del nombre");
+            }
         }
     }
 }

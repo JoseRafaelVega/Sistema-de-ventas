@@ -92,7 +92,7 @@ namespace Sistema.Negocio
         public static DataTable Login(string email, string clave)
         {
             DUsuario datos = new DUsuario();
-            return datos.Login(email, clave);
+            return datos.Login(email,clave);
         }
     }
 }

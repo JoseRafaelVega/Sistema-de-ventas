@@ -66,6 +66,8 @@
             this.txtImagen = new System.Windows.Forms.TextBox();
             this.txtId = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
@@ -166,6 +168,7 @@
             this.dgvListado.TabIndex = 2;
             this.dgvListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
             this.dgvListado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellDoubleClick);
+            this.dgvListado.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListado_CellMouseDoubleClick);
             this.dgvListado.DoubleClick += new System.EventHandler(this.dgvListado_DoubleClick);
             // 
             // Seleccionar
@@ -194,6 +197,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.TxtIdArticulo);
             this.tabPage2.Controls.Add(this.picbox);
             this.tabPage2.Controls.Add(this.button1);
@@ -426,7 +431,7 @@
             // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(276, 23);
+            this.txtId.Location = new System.Drawing.Point(357, 23);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(100, 20);
             this.txtId.TabIndex = 0;
@@ -434,6 +439,24 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(51, 26);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(51, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "IdArticulo";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(273, 30);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(61, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "IdCategoria";
             // 
             // frmArticulo
             // 
@@ -495,5 +518,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox TxtIdArticulo;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
     }
 }

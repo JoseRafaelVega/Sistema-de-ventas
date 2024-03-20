@@ -70,7 +70,7 @@
             // 
             this.TxtClave.Location = new System.Drawing.Point(141, 189);
             this.TxtClave.Name = "TxtClave";
-            this.TxtClave.PasswordChar = 'P';
+            this.TxtClave.PasswordChar = '*';
             this.TxtClave.Size = new System.Drawing.Size(166, 20);
             this.TxtClave.TabIndex = 3;
             // 
@@ -126,7 +126,6 @@
             // 
             // frmLogin
             // 
-            this.AcceptButton = this.BtnAcceder;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(531, 365);

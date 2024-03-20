@@ -62,7 +62,8 @@
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.IdRol = new System.Windows.Forms.TextBox();
+            this.TxtEstado = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tabGeneral.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
@@ -109,6 +110,9 @@
             this.dgvListado.Name = "dgvListado";
             this.dgvListado.Size = new System.Drawing.Size(686, 271);
             this.dgvListado.TabIndex = 8;
+            this.dgvListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick_1);
+            this.dgvListado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellDoubleClick_1);
+            this.dgvListado.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListado_CellMouseDoubleClick);
             // 
             // Seleccionar
             // 
@@ -186,7 +190,8 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.IdRol);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.TxtEstado);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.CbRol);
             this.tabPage2.Controls.Add(this.CbUsuarios);
@@ -389,12 +394,21 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // IdRol
+            // TxtEstado
             // 
-            this.IdRol.Location = new System.Drawing.Point(525, 29);
-            this.IdRol.Name = "IdRol";
-            this.IdRol.Size = new System.Drawing.Size(100, 20);
-            this.IdRol.TabIndex = 21;
+            this.TxtEstado.Location = new System.Drawing.Point(158, 423);
+            this.TxtEstado.Name = "TxtEstado";
+            this.TxtEstado.Size = new System.Drawing.Size(100, 20);
+            this.TxtEstado.TabIndex = 21;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(92, 430);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Estado";
             // 
             // frmUsuario
             // 
@@ -451,6 +465,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox CbRol;
-        private System.Windows.Forms.TextBox IdRol;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox TxtEstado;
     }
 }

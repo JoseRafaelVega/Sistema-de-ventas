@@ -149,12 +149,11 @@ namespace Sistema.Presentacion
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            toolStripStatusLabel.Text = $"Usuario: "{ this.Nombre}
-            {DateTime.Now};
+            toolStripStatusLabel.Text = $"Usuario: {this.Nombre},{this.Rol} ,{DateTime.Now}";
             MessageBox.Show("Bienvenido al sistema: " + this.Nombre);
 
 
-            if (this.Rol.Equals('Administrador'))
+            if (this.Rol.Equals("Administrador"))
             {
                 categoríasToolStripMenuItem.Enabled = true;
                 ingresosToolStripMenuItem.Enabled = true;
@@ -164,7 +163,7 @@ namespace Sistema.Presentacion
                 comprasToolStripMenuItem.Enabled = true;
                 almacénToolStripMenuItem.Enabled = true;
             }
-            else if (this.Rol.Equals('Vendedor'))
+            else if (this.Rol.Equals("Vendedor"))
             {
                 categoríasToolStripMenuItem.Enabled = false;
                 ingresosToolStripMenuItem.Enabled = false;
@@ -174,15 +173,18 @@ namespace Sistema.Presentacion
                 comprasToolStripMenuItem.Enabled = true;
                 almacénToolStripMenuItem.Enabled = false;
             }
-            else if (this.Rol.Equals('almacen'))
+            else if (this.Rol.Equals("almacen"))
             {
-
+                almacénToolStripMenuItem.Enabled = true;
+                categoríasToolStripMenuItem.Enabled = true;
+                accesosToolStripMenuItem.Enabled = false;
+                consultasDeVentasToolStripMenuItem.Enabled = true;
             }
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult = MessageBox.Show("Desea salir de la aplicación", MessageBoxButtons.OKCancel)
+            DialogResult = MessageBox.Show("Desea salir de la aplicación");
 
         }
     }
