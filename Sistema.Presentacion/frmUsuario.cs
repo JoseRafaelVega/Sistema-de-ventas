@@ -52,7 +52,7 @@ namespace Sistema.Presentacion
         }
         public void Formato()
         {
-            dgvListado.Columns[0].Visible = true;
+            dgvListado.Columns[0].Visible = false;
             dgvListado.Columns[1].Visible = true;
             dgvListado.Columns[2].Visible = true;
             dgvListado.Columns[3].HeaderText = "Rol";
@@ -164,7 +164,7 @@ namespace Sistema.Presentacion
                 this.Limpiar();
                 BtnActualizar.Visible = true;
                 BtnInsertar.Visible = true;
-                CbRol.Text = dgvListado.CurrentRow.Cells["idrol"].Value.ToString();
+                CbRol.Text = dgvListado.CurrentRow.Cells["idrol"].ColumnIndex.ToString();
                 TxtId.Text = dgvListado.CurrentRow.Cells["idusuario"].Value.ToString();
                 TxtNombre.Text = dgvListado.CurrentRow.Cells["nombre"].Value.ToString();
                 CbUsuarios.Text = dgvListado.CurrentRow.Cells["tipo documento"].Value.ToString();
@@ -219,10 +219,10 @@ namespace Sistema.Presentacion
                 }
                 else
                 {
-                    respuesta = NUsuarios.Actualizar(Convert.ToInt32(TxtId.Text), Convert.ToInt32(CbRol.Text), TxtNombre.Text, CbUsuarios.Text, TxtNumDocumento.Text, TxtDireccion.Text, TxtTelefono.Text, TxtEmail.Text, TxtClave.Text);
+                    respuesta = NUsuarios.Actualizar(Convert.ToInt32(TxtId.Text), Convert.ToInt32(CbRol.SelectedValue), TxtNombre.Text, CbUsuarios.Text, TxtNumDocumento.Text, TxtDireccion.Text, TxtTelefono.Text, TxtEmail.Text, TxtClave.Text);
                     if (respuesta == "OK")
                     {
-                        this.MensajeOK("El registro se insertó de manera correcta");
+                        this.MensajeOK("El registro se actualizó de manera correcta");
                         this.Listar();
                     }
                     else
@@ -372,31 +372,23 @@ namespace Sistema.Presentacion
             {
                 Console.WriteLine("No se pudo convertir el valor seleccionado a entero.");
             }
-            //int selectedValue = (int)CbRol.SelectedValue;
-            //Console.WriteLine("Valor seleccionado: " + selectedValue);
+            
         }
 
+        //int selectedValue = (int)CbRol.SelectedValue;
+        //Console.WriteLine("Valor seleccionado: " + selectedValue);
         private void CbRol_Click(object sender, EventArgs e)
         {
             
         }
-
-        private void dgvListado_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dgvListado_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void dgvListado_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             this.Limpiar();
             BtnActualizar.Visible = true;
             BtnInsertar.Visible = true;
-            CbRol.Text = dgvListado.CurrentRow.Cells["idrol"].Value.ToString();
+            CbRol.Text = dgvListado.CurrentRow.Cells["idrol"].ColumnIndex.ToString();
             TxtId.Text = dgvListado.CurrentRow.Cells["ID"].Value.ToString();
             TxtNombre.Text = dgvListado.CurrentRow.Cells["nombre"].Value.ToString();
             CbUsuarios.Text = dgvListado.CurrentRow.Cells["tipo_documento"].Value.ToString();

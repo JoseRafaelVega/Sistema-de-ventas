@@ -184,8 +184,8 @@ namespace Sistema.Presentacion
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult = MessageBox.Show("Desea salir de la aplicación");
-
+            DialogResult = MessageBox.Show("Desea salir de la aplicación: ");
+            
         }
     }
 }

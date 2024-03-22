@@ -116,6 +116,7 @@
             // 
             // BtnCancelar
             // 
+            this.BtnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnCancelar.Location = new System.Drawing.Point(186, 257);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(106, 52);
@@ -126,8 +127,10 @@
             // 
             // frmLogin
             // 
+            this.AcceptButton = this.BtnAcceder;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.BtnCancelar;
             this.ClientSize = new System.Drawing.Size(531, 365);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnAcceder);

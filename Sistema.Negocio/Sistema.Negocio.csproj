@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="NArticulos.cs" />
     <Compile Include="NCategoria.cs" />
+    <Compile Include="NPersona.cs" />
     <Compile Include="Nrol.cs" />
     <Compile Include="NUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

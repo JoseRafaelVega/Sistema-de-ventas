@@ -69,6 +69,7 @@
             // 
             // dgvListado
             // 
+            this.dgvListado.AllowUserToAddRows = false;
             this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListado.Location = new System.Drawing.Point(20, 33);
             this.dgvListado.Name = "dgvListado";
